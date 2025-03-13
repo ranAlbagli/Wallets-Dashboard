@@ -20,6 +20,7 @@ defineProps<Props>();
         <th
           v-for="header in headers"
           :key="header.value"
+          class="w-33"
           style="border-right: 1px solid #DEEAFF"
         >
           <div class="text-grey-darken-1">
