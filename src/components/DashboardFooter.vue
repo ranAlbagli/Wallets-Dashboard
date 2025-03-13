@@ -21,7 +21,6 @@ const modelItemsPerPage = computed({
 const modelCurrentPage = computed({
   get: () => props.currentPage,
   set: (value) => {
-    console.log('Page Update:', value);
     props.onPageUpdate(value);
   }
 });
