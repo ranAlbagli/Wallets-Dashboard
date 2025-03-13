@@ -55,13 +55,34 @@ export function useWallets() {
   };
 
   // Update Pagination
-  const updatePagination = () => {
-    offset.value = (currentPage.value - 1) * itemsPerPage.value;
+  const updatePagination = (newItemsPerPage: number) => {
+    itemsPerPage.value = newItemsPerPage;
+    currentPage.value = 1;
+    offset.value = 0;
     refetch(queryOptions.value);
   };
 
-  const updatePaginationAfterPageClick = () => {
-    offset.value = currentPage.value
+  const updatePaginationAfterPageClick = (newPage: number) => {
+    console.log('Pagination Debug:', {
+      currentPage: currentPage.value,
+      newPage,
+      itemsPerPage: itemsPerPage.value,
+      currentOffset: offset.value,
+      calculation: `(${newPage} - 1) * ${itemsPerPage.value} = ${(newPage - 1) * itemsPerPage.value}`,
+      explanation: `Skip ${(newPage - 1) * itemsPerPage.value} records and start from record ${(newPage - 1) * itemsPerPage.value + 1}`
+    });
+    
+    currentPage.value = newPage;
+    offset.value = (newPage - 1) * itemsPerPage.value;
+    
+    console.log('After Update:', {
+      currentPage: currentPage.value,
+      newPage,
+      itemsPerPage: itemsPerPage.value,
+      newOffset: offset.value,
+      queryExplanation: `DB Query: Skip ${offset.value} records, return ${itemsPerPage.value} records starting from record ${offset.value + 1}`
+    });
+    
     refetch(queryOptions.value);
   };
 

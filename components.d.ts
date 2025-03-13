@@ -7,9 +7,14 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AssetTable: typeof import('./src/components/AssetTable.vue')['default']
     Dashboard: typeof import('./src/components/Dashboard.vue')['default']
+    DashboardFooter: typeof import('./src/components/DashboardFooter.vue')['default']
+    DashboardHeader: typeof import('./src/components/DashboardHeader.vue')['default']
     Filters: typeof import('./src/components/Filters.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    WalletCard: typeof import('./src/components/WalletCard.vue')['default']
+    WalletList: typeof import('./src/components/WalletList.vue')['default']
   }
 }
