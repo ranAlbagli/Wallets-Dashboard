@@ -1,4 +1,5 @@
 # Wallets Dashboard
+![image](https://github.com/user-attachments/assets/71eeeee2-063e-4f68-bcb5-4b1c31de1940)
 
 A modern web application built with Vue 3, TypeScript, and Vuetify for managing and visualizing wallet data. The application uses GraphQL for data fetching and includes a mock server for development purposes.
 
