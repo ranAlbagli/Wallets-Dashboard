@@ -3,7 +3,6 @@ import { useQuery } from "@vue/apollo-composable";
 import { GET_WALLETS, GET_FILTER_OPTIONS } from "../graphql/queries.ts";
 
 export function useWallets() {
-  // Filters and Sorting
   const filter = ref({ name: [], asset: [], network: [] });
   const offset = ref(0);
   const sortField = ref("name");
@@ -30,13 +29,10 @@ export function useWallets() {
     },
   }));
 
-  // Fetch wallets
   const { result, refetch } = useQuery(GET_WALLETS, queryOptions.value);
 
-  // Fetch filter options
   const { result: filterResult } = useQuery(GET_FILTER_OPTIONS);
 
-  // Computed properties
   const wallets = computed(() => result.value?.wallets?.wallets || []);
   const totalCount = computed(() => result.value?.wallets?.totalCount || 0);
   const totalPages = computed(() => Math.ceil(totalCount.value / itemsPerPage.value));
@@ -46,7 +42,6 @@ export function useWallets() {
     return `${start} - ${end}`;
   });
 
-  // Apply filter
   const applyFilter = (filterType: keyof typeof filter.value, selectedValues: string[]) => {
     filter.value[filterType] = selectedValues.length > 0 ? selectedValues : [];
     offset.value = 0;
@@ -54,25 +49,25 @@ export function useWallets() {
     refetch(queryOptions.value);
   };
 
-  // Update Pagination
-  const updatePagination = () => {
-    offset.value = (currentPage.value - 1) * itemsPerPage.value;
+  const updatePagination = (value: number) => {
+    itemsPerPage.value = value;
+    offset.value = 0;
+    currentPage.value = 1;
     refetch(queryOptions.value);
   };
 
-  const updatePaginationAfterPageClick = () => {
-    offset.value = currentPage.value
+  const updatePaginationAfterPageClick = (value: number) => {
+    currentPage.value = value;
+    offset.value = (value - 1) * itemsPerPage.value;
     refetch(queryOptions.value);
   };
 
-  // Table Expansion Logic
   const expanded = ref([]);
   const allExpanded = computed(() => expanded.value.length === wallets.value.length);
   const toggleAll = () => {
     expanded.value = allExpanded.value ? [] : wallets.value.map(wallet => wallet.id);
   };
 
-  // Text Truncate Helper
   const truncateText = (text: string) => {
     const maxLength = 16;
     if (text.length <= maxLength) return text;
