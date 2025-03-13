@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import Dashboard from "./components/Dashboard.vue";
+
+import Dashboard from "../src/features/wallets/components/dashboard/Dashboard.vue";
 </script>
 
 <template>
