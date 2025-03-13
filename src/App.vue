@@ -1,11 +1,10 @@
-<script lang="ts" setup>
-import Dashboard from "./components/Dashboard.vue";
+<script setup lang="ts">
 </script>
 
 <template>
   <v-app>
     <v-main style="background-color: #FAFAFC">
-      <Dashboard />
+      <router-view />
     </v-main>
   </v-app>
 </template>

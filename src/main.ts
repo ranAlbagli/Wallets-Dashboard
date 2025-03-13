@@ -1,15 +1,12 @@
-
-import { registerPlugins } from '@/plugins'
-import { createApp, provide, h } from "vue";
+import { createApp } from "vue";
 import { DefaultApolloClient } from "@vue/apollo-composable";
 import apolloClient from "./graphql/apolloClient";
 import App from "./App.vue";
+import { registerPlugins } from './plugins'
 
-const app = createApp({
-  setup() {
-    provide(DefaultApolloClient, apolloClient); // ✅ Provide Apollo client
-  },
-  render: () => h(App),
-});
-registerPlugins(app)
+const app = createApp(App);
+
+registerPlugins(app);
+app.provide(DefaultApolloClient, apolloClient);
+
 app.mount("#app");
