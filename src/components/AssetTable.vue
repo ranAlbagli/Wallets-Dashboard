@@ -35,7 +35,7 @@ defineProps<Props>();
             <v-icon size="16">
               $coin
             </v-icon>
-            <div>{{ innerItem.name }}</div>
+            <div>{{ innerItem?.name }}</div>
           </div>
         </td>
         <td colspan="1">
@@ -43,18 +43,18 @@ defineProps<Props>();
             <v-icon size="14">
               $network
             </v-icon>
-            <div>{{ innerItem.asset.network }}</div>
+            <div>{{ innerItem?.asset?.network }}</div>
           </div>
         </td>
         <td colspan="1">
           <div class="d-flex flex-column">
-            <div>{{ roundNumber(innerItem.assetAmount, 0) }} SOL</div>
+            <div>{{ roundNumber(innerItem?.assetAmount, 0) }} SOL</div>
             <div class="d-flex align-center ga-1">
               <v-icon size="16">
                 $asset
               </v-icon>
               <div class="text-grey">
-                {{ roundNumber(innerItem.assetUsdValue.value, 0) }} USD
+                {{ roundNumber(innerItem?.assetUsdValue?.value, 0) }} USD
               </div>
             </div>
           </div>
