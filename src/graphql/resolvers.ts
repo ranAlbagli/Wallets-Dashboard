@@ -20,7 +20,6 @@ export const resolvers = {
     ) => {
       let filteredWallets = [...wallets];
 
-      // 🔹 Apply Filtering
       if (filter?.name && Array.isArray(filter.name) && filter.name.length > 0) {
         filteredWallets = filteredWallets.filter(wallet =>
           filter.name!.includes(wallet.name)
@@ -43,7 +42,6 @@ export const resolvers = {
         );
       }
 
-      // 🔹 Apply Sorting
       if (sortField && filteredWallets.length > 0) {
         filteredWallets.sort((a, b) => {
           const valueA = a[sortField as keyof typeof a] ?? "";
@@ -55,11 +53,10 @@ export const resolvers = {
             return sortOrder === "ASC" ? valueA - valueB : valueB - valueA;
           }
 
-          return 0; // Default no sorting if types don't match
+          return 0;
         });
       }
 
-      // 🔹 Apply Pagination
       const paginatedWallets = filteredWallets.slice(offset, offset + limit);
 
       return {
